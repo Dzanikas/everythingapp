@@ -1,0 +1,12 @@
+<h3>Your invitations</h3>
+
+Event: <%= @event.name%>
+Organizer: <%= @event.organizer.name%>
+Location: <%= @event.location%>
+Time: <%= @event.time%>
+Attendees: <ul><%= @event.attendees.each do |attendee|%>
+<li><%= attendee.name %></li>
+</ul>             
+
+<%= link_to "Express interest"%>
+<%= link_to "Go back", :back%>

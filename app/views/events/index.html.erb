@@ -1,0 +1,13 @@
+<h1>Welcome, <%= current_user.name%></h1>
+<h3>Event's list</h3>
+<% @events.each do |event|%>
+    Event: <%= event.name%><br>
+    Organizer: <%= event.organizer.name%><br>
+    Location: <%= event.location%><br>
+    Time: <%= event.time%><br>
+    <%= link_to "See the event", event_path(event)%><br>
+<%end%><br>
+<%= button_to "Create an event", new_event_path, method: :get%>
+<%= button_to "See my events", my_events_events_path, method: :get %>
+<br>
+<%= link_to 'Sign Out', destroy_user_session_path, data: {turbo_method: :delete} %>

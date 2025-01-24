@@ -1,0 +1,5 @@
+<%= turbo_stream.append "attendees" do %>
+  <li><%= current_user == @event.organizer ? "<strong>You</strong>".html_safe : current_user.name %></li>
+<% end %>
+
+<%= turbo_stream.remove "attend-link" %>

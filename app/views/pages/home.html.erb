@@ -1,0 +1,12 @@
+<h1>Welcome to the EverythingApp!</h1>
+<% if user_signed_in? %> 
+ <div> Hi, <%= current_user.name %>! </div> 
+  <%= button_to "See all events", events_path, method: :get %>
+  <%= button_to "See my events", my_events_events_path, method: :get %>  
+  <%= link_to 'Sign Out', destroy_user_session_path, data: {turbo_method: :delete} %>
+<% else %>
+<p>Before you go further, you must login!</p>
+<%= button_to "Login", new_user_session_path%>
+<p>Not a user? Sign-up!</p>
+<%= button_to "Sign-up", user_registration_path%>
+<% end %>

@@ -1,0 +1,35 @@
+<h3>Your events</h3>
+<br>
+<h5>Events you organize</h5>
+<% if @events_organized.present? %>
+<% @events_organized.each do |e|%>
+    Name: <%= e.name%><br>
+    Location: <%= e.location%><br>
+    Time: <%= e.time%><br>
+    Attendees: <ul><% e.attendees.each do |attendee|%>
+    <li><%= attendee.name %></li>
+    <%end%>
+    </ul>
+    <%= link_to "See the event", event_path(e)%>
+<%end%>
+<% else %>
+  <p>You have no events organized.</p>
+<% end %>
+<h5>Events you attend</h5>
+<% if @events_attended.present? %>
+<% @events_attended.each do |e|%>
+    Name: <%= e.name%><br>
+    Organizer: <%= e.organizer == current_user ? "<strong>You</strong>".html_safe : e.organizer.name%><br>
+    Location: <%= e.location%><br>
+    Time: <%= e.time%><br>
+    Attendees: <ul><% e.attendees.each do |attendee|%>
+    <li><%= attendee.name %></li>
+    <%end%>
+    </ul>
+    <%= link_to "See the event", event_path(e)%>
+<%end%>
+<% else %>
+  <p>You are attending no events</p>
+<% end %>
+<br>
+<%= link_to "Go back", :back%>

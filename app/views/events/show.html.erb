@@ -1,0 +1,17 @@
+<h3>Event page</h3>
+
+Event: <%= @event.name%><br>
+Organizer: <%= @event.organizer.name%><br>
+Location: <%= @event.location%><br>
+Time: <%= @event.time%><br>
+Attendees:
+<ul id="attendees">
+  <% @event.attendees.each do |attendee| %>
+    <li><%= attendee == current_user ? "<strong>You</strong>".html_safe : attendee.name %></li>
+  <% end %>
+</ul>            
+<br>
+<% unless @event.attendees.include?(current_user) %>
+  <%= link_to "Attend", attend_event_path(@event), method: :post, data: { turbo_method: :post }, class: "btn btn-primary", id: "attend-link" %>
+<% end %>
+<%= link_to "Go back", :back%>
