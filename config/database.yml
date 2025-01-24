@@ -74,8 +74,8 @@ test:
 # the values provided in this file. Alternatively, you can specify a connection
 # URL environment variable explicitly:
 #
-#   production:
-#     url: <%= ENV["MY_APP_DATABASE_URL"] %>
+#production:
+  #url: <%= ENV['postgresql://mysite:Z4wUS4Qoh3gOE0MrjYY5uJZeuWf4rXyB@dpg-cu9q5jpu0jms73firp3g-a/mysite_e50l'] %>
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
@@ -85,7 +85,8 @@ production:
     <<: *default
     database: postgresql_test_production
     username: postgresql_test
-    password: <%= ENV["POSTGRESQL_TEST_DATABASE_PASSWORD"] %>
+    #password: <%= ENV["POSTGRESQL_TEST_DATABASE_PASSWORD"] %>
+    url: <%= ENV['postgresql://mysite:Z4wUS4Qoh3gOE0MrjYY5uJZeuWf4rXyB@dpg-cu9q5jpu0jms73firp3g-a/mysite_e50l'] %>
   cache:
     <<: *primary_production
     database: postgresql_test_production_cache
