@@ -12,19 +12,19 @@
 # Configure Using Gemfile
 # gem "pg"
 #
-default: &default
-  adapter: postgresql
-  encoding: unicode
+#default: &default
+#  adapter: postgresql
+#  encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: dzanikas # role previously added
-  password: <%= ENV['DATABASE_PASSWORD'] %> # variable previously added
+#  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#  username: dzanikas # role previously added
+#  password: <%= ENV['DATABASE_PASSWORD'] %> # variable previously added
 
 
-development:
-  <<: *default
-  database: postgresql_test_development
+#development:
+#  <<: *default
+#  database: postgresql_test_development
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -56,9 +56,9 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: postgresql_test_test
+#test:
+#  <<: *default
+#  database: postgresql_test_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,22 +80,52 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+#production:
+#  primary: &primary_production
+#    <<: *default
+#    database: postgresql_test_production
+#    username: postgresql_test
+    #password: <%= ENV["POSTGRESQL_TEST_DATABASE_PASSWORD"] %>
+#   url: <%= ENV[postgresql://mysite:Z4wUS4Qoh3gOE0MrjYY5uJZeuWf4rXyB@dpg-cu9q5jpu0jms73firp3g-a/mysite_e50l] %>
+#  cache:
+#    <<: *primary_production
+#    database: postgresql_test_production_cache
+#    migrations_paths: db/cache_migrate
+#  queue:
+#    <<: *primary_production
+#    database: postgresql_test_production_queue
+#    migrations_paths: db/queue_migrate
+#  cable:
+#    <<: *primary_production
+#    database: postgresql_test_production_cable
+#    migrations_paths: db/cable_migrate
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV['postgresql://mysite:Z4wUS4Qoh3gOE0MrjYY5uJZeuWf4rXyB@dpg-cu9q5jpu0jms73firp3g-a/mysite_e50l'] %> # Pulls connection details from DATABASE_URL
+
+development:
+  <<: *default
+  database: postgresql_test_development
+
+test:
+  <<: *default
+  database: postgresql_test_test
+
 production:
+  <<: *default
+  # Using DATABASE_URL for all production databases
   primary: &primary_production
     <<: *default
-    database: postgresql_test_production
-    username: postgresql_test
-    #password: <%= ENV["POSTGRESQL_TEST_DATABASE_PASSWORD"] %>
-    url: <%= ENV['postgresql://mysite:Z4wUS4Qoh3gOE0MrjYY5uJZeuWf4rXyB@dpg-cu9q5jpu0jms73firp3g-a/mysite_e50l'] %>
   cache:
     <<: *primary_production
-    database: postgresql_test_production_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: postgresql_test_production_queue
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: postgresql_test_production_cable
     migrations_paths: db/cable_migrate
+
